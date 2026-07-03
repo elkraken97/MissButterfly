@@ -1,0 +1,28 @@
+<div class="admin-card" [class]="'admin-card--' + color()">
+  <div class="admin-card__header">
+    @if (icon()) {
+      <div class="admin-card__icon" [innerHTML]="icon()"></div>
+    }
+    <span class="admin-card__label">{{ title() }}</span>
+  </div>
+  <div class="admin-card__body">
+    <span class="admin-card__value">{{ value() }}</span>
+    @if (subtitle()) {
+      <span class="admin-card__subtitle">{{ subtitle() }}</span>
+    }
+  </div>
+  @if (trendValue()) {
+    <div class="admin-card__trend" [class]="'admin-card__trend--' + trend()">
+      <svg class="admin-card__trend-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        @if (trend() === 'up') {
+          <path d="m18 15-6-6-6 6" />
+        } @else if (trend() === 'down') {
+          <path d="m6 9 6 6 6-6" />
+        } @else {
+          <path d="M5 12h14" />
+        }
+      </svg>
+      <span class="admin-card__trend-value">{{ trendValue() }}</span>
+    </div>
+  }
+</div>

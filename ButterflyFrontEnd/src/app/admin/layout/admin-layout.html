@@ -1,0 +1,17 @@
+<div class="admin-layout">
+  <admin-sidebar
+    [open]="sidebarOpen()"
+    (toggle)="toggleSidebar()"
+  />
+
+  @if (sidebarOpen()) {
+    <div class="admin-layout__overlay" (click)="closeSidebar()"></div>
+  }
+
+  <div class="admin-layout__main">
+    <admin-topbar (toggleSidebar)="toggleSidebar()" />
+    <main class="admin-layout__content">
+      <router-outlet />
+    </main>
+  </div>
+</div>

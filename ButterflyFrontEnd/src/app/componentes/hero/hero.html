@@ -1,0 +1,55 @@
+<section id="hero" class="hero">
+  <!-- Carrusel de fondo -->
+  <div class="hero__carousel" aria-hidden="true">
+    @for (slide of slides; track slide.url; let i = $index) {
+      <img
+        [src]="slide.url"
+        [alt]="slide.alt"
+        class="hero__carousel-img"
+        [class.hero__carousel-img--active]="i === currentIndex()"
+        loading="eager"
+      />
+    }
+  </div>
+
+  <!-- Degradado overlay para legibilidad -->
+  <div class="hero__overlay" aria-hidden="true"></div>
+
+  <!-- Contenido principal -->
+  <div class="hero__content container">
+    <span class="hero__eyebrow">Colección Primavera 2026</span>
+
+    <h1 class="hero__title">
+      Elegancia que<br />
+      <span class="hero__title-accent">florece</span>
+    </h1>
+
+    <p class="hero__subtitle">
+      Descubre una nueva forma de expresar tu esencia a través de prendas diseñadas para la mujer contemporánea que busca autenticidad y belleza en cada detalle.
+    </p>
+
+    <button class="hero__cta" (click)="scrollToCatalog()">
+      <span>Ver catálogo</span>
+      <svg class="hero__cta-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Puntos de navegación del carrusel -->
+  <nav class="hero__dots" aria-label="Navegación del carrusel">
+    @for (slide of slides; track slide.url; let i = $index) {
+      <button
+        class="hero__dot"
+        [class.hero__dot--active]="i === currentIndex()"
+        (click)="goToSlide(i)"
+        [attr.aria-label]="'Ir a la imagen ' + (i + 1)"
+      ></button>
+    }
+  </nav>
+
+  <div class="hero__scroll-indicator" aria-hidden="true">
+    <span></span>
+  </div>
+</section>

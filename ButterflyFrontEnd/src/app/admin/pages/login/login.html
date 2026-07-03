@@ -1,0 +1,95 @@
+<div class="login">
+  <div class="login__container">
+    <!-- Branding -->
+    <div class="login__brand">
+      <a class="login__logo" routerLink="/">
+        <span class="login__logo-mark">Butterfly</span>
+      </a>
+      <h1 class="login__title">Panel de Administración</h1>
+      <p class="login__subtitle">Ingresa con tus credenciales para acceder al panel.</p>
+    </div>
+
+    <!-- Formulario -->
+    <form class="login__form" (ngSubmit)="onSubmit()" #loginForm="ngForm">
+      <!-- Error message -->
+      @if (auth.error(); as errorMsg) {
+        <div class="login__error">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <span>{{ errorMsg }}</span>
+        </div>
+      }
+
+      <div class="login__field">
+        <label class="login__label" for="email">Correo electrónico</label>
+        <input
+          id="email"
+          class="login__input"
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="admin@butterfly.com"
+          required
+          autocomplete="email"
+          [disabled]="auth.loading()"
+        />
+      </div>
+
+      <div class="login__field">
+        <label class="login__label" for="password">Contraseña</label>
+        <input
+          id="password"
+          class="login__input"
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="••••••••"
+          required
+          autocomplete="current-password"
+          [disabled]="auth.loading()"
+        />
+      </div>
+
+      <button
+        class="login__submit"
+        type="submit"
+        [disabled]="!loginForm.form.valid || auth.loading()"
+      >
+        @if (auth.loading()) {
+          <span class="login__spinner"></span>
+          <span>Iniciando sesión...</span>
+        } @else {
+          <span>Iniciar Sesión</span>
+        }
+      </button>
+
+      <p class="login__hint">
+        Demo: <strong>admin@butterfly.com</strong> / <strong>butterfly2026</strong>
+      </p>
+    </form>
+
+    <a class="login__back" routerLink="/">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12" />
+        <polyline points="12 19 5 12 12 5" />
+      </svg>
+      Volver al sitio
+    </a>
+
+    <footer class="login__footer">
+      <p>&copy; {{ currentYear }} Butterfly. Todos los derechos reservados.</p>
+    </footer>
+  </div>
+
+  <!-- Decoración lateral -->
+  <div class="login__decor" aria-hidden="true">
+    <div class="login__decor-overlay"></div>
+    <div class="login__decor-content">
+      <span class="login__decor-accent">Butterfly</span>
+      <span class="login__decor-tagline">Moda Femenina con Esencia</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,217 @@
+/* ===== ADMIN SIDEBAR ===== */
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 260px;
+  min-height: 100dvh;
+  background: var(--color-text);
+  color: var(--color-bg);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 200;
+  transition: transform var(--transition-base);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.admin-sidebar {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+
+  &__header {
+    padding: 1.5rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__logo {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--color-surface);
+    line-height: 1;
+  }
+
+  &__logo-accent {
+    font-style: italic;
+    color: var(--color-primary-light);
+  }
+
+  &__badge {
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.15rem 0.5rem;
+    background: rgba(212, 160, 180, 0.2);
+    color: var(--color-primary-light);
+    border-radius: 4px;
+    line-height: 1.4;
+  }
+
+  &__nav {
+    flex: 1;
+    padding: 1rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  &__section-label {
+    font-family: var(--font-body);
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.25);
+    padding: 1rem 0.75rem 0.5rem;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 0.75rem;
+    border-radius: 10px;
+    color: rgba(255, 255, 255, 0.55);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    position: relative;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary-light);
+      outline-offset: 2px;
+    }
+
+    &--active {
+      color: var(--color-surface);
+      background: rgba(212, 160, 180, 0.15);
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: -0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 20px;
+        background: var(--color-primary);
+        border-radius: 0 3px 3px 0;
+      }
+    }
+
+    &--logout {
+      margin-top: 0.5rem;
+      color: rgba(255, 200, 200, 0.5);
+
+      &:hover {
+        color: #ef9a9a;
+        background: rgba(255, 100, 100, 0.08);
+      }
+    }
+  }
+
+  &__link-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+
+    ::ng-deep svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &__footer {
+    padding: 1rem 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+  }
+
+  &__avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-surface);
+    flex-shrink: 0;
+  }
+
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    overflow: hidden;
+  }
+
+  &__user-name {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-surface);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__user-role {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* --- Mobile Overlay --- */
+@media (max-width: 1023px) {
+  :host {
+    transform: translateX(-100%);
+
+    &.sidebar--open {
+      transform: translateX(0);
+    }
+  }
+}

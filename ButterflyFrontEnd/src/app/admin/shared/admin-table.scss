@@ -1,0 +1,239 @@
+/* ===== ADMIN TABLE ===== */
+
+.admin-table-wrapper {
+  position: relative;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+
+  &--loading {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &__head {
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  &__row {
+    transition: background var(--transition-fast);
+
+    &--body {
+      &:hover {
+        background: var(--color-bg-alt);
+      }
+
+      &:last-child .admin-table__cell {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &__cell {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    font-size: 0.85rem;
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-border-light);
+    vertical-align: middle;
+    white-space: nowrap;
+
+    &--head {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-secondary);
+      padding-top: 0.9rem;
+      padding-bottom: 0.9rem;
+    }
+
+    &--sortable {
+      cursor: pointer;
+      user-select: none;
+
+      &:hover .admin-table__head-label {
+        color: var(--color-primary-dark);
+      }
+    }
+
+    &--actions {
+      text-align: right;
+    }
+
+    &--check {
+      width: 48px;
+      text-align: center;
+    }
+
+    &--empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      white-space: normal;
+    }
+  }
+
+  &__head-label {
+    transition: color var(--transition-fast);
+  }
+
+  &__checkbox {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  &__image-cell {
+    display: flex;
+    align-items: center;
+  }
+
+  &__thumb {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border-light);
+  }
+
+  &__text {
+    font-weight: 400;
+  }
+
+  &__currency {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: capitalize;
+
+    &--active {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    &--inactive {
+      background: #fce4ec;
+      color: #c62828;
+    }
+
+    &--pending {
+      background: #fff3e0;
+      color: #e65100;
+    }
+  }
+
+  &__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.35rem;
+  }
+
+  &__action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: none;
+
+    &:hover {
+      background: var(--color-bg-alt);
+    }
+
+    &--primary:hover {
+      background: var(--color-primary-light);
+      color: var(--color-primary-dark);
+    }
+
+    &--danger:hover {
+      background: #fce4ec;
+      color: #c62828;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+  }
+
+  &__loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(2px);
+  }
+
+  &__spinner {
+    width: 32px;
+    height: 32px;
+    border: 2px solid var(--color-border);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: adminSpin 0.6s linear infinite;
+  }
+}
+
+@keyframes adminSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width: 767px) {
+  .admin-table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+  }
+
+  .admin-table {
+    min-width: 700px;
+  }
+}

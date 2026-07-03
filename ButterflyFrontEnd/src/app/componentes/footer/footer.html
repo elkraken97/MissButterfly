@@ -1,0 +1,55 @@
+<footer id="contact" class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <span class="footer__logo">Butterfly</span>
+        <p class="footer__tagline">
+          Moda femenina con esencia. Cada prenda está diseñada para celebrar la belleza única de la mujer contemporánea.
+        </p>
+      </div>
+
+      <div class="footer__links">
+        <h4 class="footer__heading">Enlaces</h4>
+        <a class="footer__link" (click)="scrollTo('hero')">Inicio</a>
+        <a class="footer__link" (click)="scrollTo('catalog')">Catálogo</a>
+        <a class="footer__link" href="#">Sobre Nosotras</a>
+        <a class="footer__link" href="#">Contacto</a>
+      </div>
+
+      <div class="footer__links">
+        <h4 class="footer__heading">Atención</h4>
+        <a class="footer__link" href="#">Envíos y Devoluciones</a>
+        <a class="footer__link" href="#">Términos y Condiciones</a>
+        <a class="footer__link" href="#">Política de Privacidad</a>
+        <a class="footer__link" href="#">Preguntas Frecuentes</a>
+      </div>
+
+      <div class="footer__social">
+        <h4 class="footer__heading">Síguenos</h4>
+        <div class="footer__social-icons">
+          <a href="#" class="footer__social-link" aria-label="Instagram">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Pinterest">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a10 10 0 0 0-3.16 19.48 9.32 9.32 0 0 1 .16-2.04l1-4.15a3.73 3.73 0 0 1-.31-1.56c0-1.46.85-2.55 1.9-2.55.9 0 1.33.67 1.33 1.48 0 .9-.57 2.25-.87 3.5a1.52 1.52 0 0 0 1.55 1.9c1.86 0 3.3-1.96 3.3-4.8 0-2.5-1.8-4.25-4.38-4.25a4.56 4.56 0 0 0-4.75 4.57c0 .9.35 1.87.79 2.4a.32.32 0 0 1 .08.36l-.29 1.17a.22.22 0 0 1-.32.16c-1.18-.55-1.92-2.27-1.92-3.65 0-2.98 2.16-5.71 6.23-5.71 3.28 0 5.82 2.34 5.82 5.46 0 3.26-2.06 5.88-4.92 5.88a2.55 2.55 0 0 1-2.16-1.12l-.59 2.24a9.33 9.33 0 0 1-1.02 2.54A10 10 0 1 0 12 2z" />
+            </svg>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Facebook">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copyright">&copy; {{ currentYear }} Butterfly. Todos los derechos reservados.</p>
+    </div>
+  </div>
+</footer>

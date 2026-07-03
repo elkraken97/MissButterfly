@@ -1,0 +1,126 @@
+/* ===== FOOTER COMPONENT ===== */
+
+.footer {
+  background: var(--color-text);
+  color: var(--color-bg);
+  padding: 4rem 0 0;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  &__logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  &__tagline {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 300px;
+  }
+
+  &__heading {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary-light);
+    margin-bottom: 1.25rem;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__link {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-primary-light);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary-light);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  &__social-icons {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.55);
+    transition: all var(--transition-fast);
+
+    &:hover {
+      color: var(--color-primary-light);
+      border-color: var(--color-primary-light);
+      transform: translateY(-2px);
+    }
+  }
+
+  &__bottom {
+    padding: 1.5rem 0;
+    text-align: center;
+  }
+
+  &__copyright {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.35);
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width: 1023px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 639px) {
+  .footer {
+    padding: 3rem 0 0;
+  }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}

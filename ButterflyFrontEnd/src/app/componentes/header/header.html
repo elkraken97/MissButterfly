@@ -1,0 +1,31 @@
+<header
+  class="header"
+  [class.header--scrolled]="isScrolled()"
+>
+  <div class="header__inner container">
+    <a class="header__logo" (click)="scrollTo('hero')">
+      <span class="header__logo-mark">Butterfly</span>
+    </a>
+
+    <nav class="header__nav" [class.header__nav--open]="isMenuOpen()">
+      <a class="header__nav-link" (click)="scrollTo('hero')">Inicio</a>
+      <a class="header__nav-link" (click)="scrollTo('catalog')">Catálogo</a>
+      <a class="header__nav-link" (click)="scrollTo('contact')">Contacto</a>
+    </nav>
+
+    <button
+      class="header__hamburger"
+      [class.header__hamburger--active]="isMenuOpen()"
+      (click)="toggleMenu()"
+      aria-label="Menú de navegación"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    @if (isMenuOpen()) {
+      <div class="header__overlay" (click)="closeMenu()"></div>
+    }
+  </div>
+</header>

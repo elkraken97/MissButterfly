@@ -1,0 +1,222 @@
+/* ===== DASHBOARD PAGE ===== */
+
+.dashboard {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.2;
+  }
+
+  &__subtitle {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    font-weight: 300;
+    margin-top: 0.25rem;
+  }
+
+  &__date {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    padding: 0.4rem 0.85rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  &__sections {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 1.5rem;
+  }
+
+  &__section {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+
+  &__section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  &__section-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  &__section-link {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--color-primary-dark);
+    cursor: pointer;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+
+  /* --- Recent Orders Table --- */
+  &__orders-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  &__orders-table th {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    text-align: left;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  &__orders-table td {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    color: var(--color-text);
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  &__orders-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  &__order-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 500;
+
+    &--completado {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    &--pendiente {
+      background: #fff3e0;
+      color: #e65100;
+    }
+
+    &--enviado {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+  }
+
+  &__order-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  /* --- Top Products --- */
+  &__product-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--color-border-light);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__product-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: var(--color-bg-alt);
+    flex-shrink: 0;
+  }
+
+  &__product-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__product-name {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__product-category {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    color: var(--color-text-light);
+  }
+
+  &__product-price {
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-primary-dark);
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width: 1200px) {
+  .dashboard {
+    &__cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__sections {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media (max-width: 639px) {
+  .dashboard {
+    &__header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    &__cards {
+      grid-template-columns: 1fr;
+    }
+  }
+}

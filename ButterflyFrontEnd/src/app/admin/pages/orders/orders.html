@@ -1,0 +1,45 @@
+<div class="orders">
+  <div class="orders__header">
+    <div class="orders__title-group">
+      <h1 class="orders__title">Pedidos</h1>
+      <p class="orders__count">{{ filteredOrders.length }} pedidos</p>
+    </div>
+  </div>
+
+  <div class="orders__filters">
+    <div class="orders__search">
+      <span class="orders__search-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      </span>
+      <input
+        class="orders__search-input"
+        type="text"
+        placeholder="Buscar pedidos..."
+        [value]="searchQuery()"
+        (input)="updateSearch($event)"
+      />
+    </div>
+
+    <div class="orders__filter-group">
+      @for (status of statuses; track status) {
+        <button
+          class="orders__filter-chip"
+          [class.orders__filter-chip--active]="selectedStatus() === status || (!selectedStatus() && status === 'Todos')"
+          (click)="selectStatus(status)"
+        >
+          {{ status }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <admin-table
+    [columns]="columns"
+    [data]="filteredOrders"
+    [actions]="actions"
+    [emptyMessage]="'No se encontraron pedidos'"
+  />
+</div>

@@ -1,0 +1,182 @@
+/* ===== ADMIN TOPBAR ===== */
+
+.admin-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  height: 60px;
+  gap: 1rem;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  &__menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: none;
+
+    &:hover {
+      background: var(--color-bg-alt);
+      color: var(--color-text);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  &__crumb {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-primary-dark);
+    }
+
+    &--current {
+      color: var(--color-text);
+      font-weight: 500;
+    }
+  }
+
+  &__separator {
+    display: flex;
+    align-items: center;
+    color: var(--color-text-light);
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &__icon-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: none;
+
+    &:hover {
+      background: var(--color-bg-alt);
+      color: var(--color-text);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  &__notification-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    border: 2px solid var(--color-surface);
+  }
+
+  &__divider {
+    width: 1px;
+    height: 24px;
+    background: var(--color-border);
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+
+    &:hover {
+      background: var(--color-bg-alt);
+    }
+  }
+
+  &__avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-surface);
+    flex-shrink: 0;
+  }
+
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.05rem;
+  }
+
+  &__user-name {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text);
+    line-height: 1.2;
+  }
+
+  &__user-role {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    color: var(--color-text-light);
+    line-height: 1.2;
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width: 1023px) {
+  .admin-topbar {
+    &__menu-btn {
+      display: flex;
+    }
+
+    &__user-info {
+      display: none;
+    }
+  }
+}

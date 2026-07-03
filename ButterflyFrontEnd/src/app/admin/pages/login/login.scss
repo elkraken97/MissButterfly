@@ -1,0 +1,306 @@
+/* ===== LOGIN PAGE ===== */
+
+.login {
+  display: flex;
+  min-height: 100dvh;
+  background: var(--color-bg);
+
+  /* --- Formulario --- */
+  &__container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  &__brand {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  &__logo {
+    display: inline-block;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+  }
+
+  &__logo-mark {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--color-text);
+    letter-spacing: 0.04em;
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-primary-dark);
+    }
+  }
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  &__subtitle {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    font-weight: 300;
+  }
+
+  /* --- Form --- */
+  &__form {
+    width: 100%;
+    max-width: 380px;
+  }
+
+  &__field {
+    margin-bottom: 1.25rem;
+  }
+
+  &__label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    outline: none;
+    transition: all var(--transition-fast);
+
+    &::placeholder {
+      color: var(--color-text-light);
+    }
+
+    &:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(212, 160, 180, 0.12);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  &__submit {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.5rem;
+    margin-top: 0.5rem;
+    background: var(--color-primary);
+    color: var(--color-surface);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all var(--transition-base);
+
+    &:hover:not(:disabled) {
+      background: var(--color-primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(212, 160, 180, 0.35);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary-dark);
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: loginSpin 0.6s linear infinite;
+  }
+
+  &__error {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.65rem 0.85rem;
+    background: #fce4ec;
+    color: #c62828;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__hint {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    color: var(--color-text-light);
+    text-align: center;
+    margin-top: 1.25rem;
+    font-weight: 300;
+
+    strong {
+      font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+  }
+
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.5rem;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+
+    &:hover {
+      color: var(--color-primary-dark);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+  }
+
+  &__footer {
+    margin-top: auto;
+    padding-top: 2rem;
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    color: var(--color-text-light);
+    text-align: center;
+  }
+
+  /* --- Decoración lateral --- */
+  &__decor {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    width: 42%;
+    flex-shrink: 0;
+    min-height: 100dvh;
+    background:
+      url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=800&q=80&auto=format&fit=crop')
+      center / cover no-repeat;
+    overflow: hidden;
+  }
+
+  &__decor-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(45, 27, 30, 0.7) 0%,
+      rgba(212, 160, 180, 0.4) 50%,
+      rgba(45, 27, 30, 0.5) 100%
+    );
+  }
+
+  &__decor-content {
+    position: relative;
+    z-index: 1;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__decor-accent {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--color-surface);
+    font-style: italic;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.75rem;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &__decor-tagline {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}
+
+@keyframes loginSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width: 1023px) {
+  .login {
+    &__decor {
+      display: none;
+    }
+
+    &__container {
+      max-width: 100%;
+      padding: 2rem 1.5rem;
+    }
+  }
+}
+
+@media (max-width: 639px) {
+  .login {
+    &__title {
+      font-size: 1.2rem;
+    }
+
+    &__form {
+      max-width: 100%;
+    }
+  }
+}

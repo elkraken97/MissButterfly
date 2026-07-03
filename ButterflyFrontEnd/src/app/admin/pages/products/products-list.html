@@ -1,0 +1,54 @@
+<div class="products-list">
+  <div class="products-list__header">
+    <div class="products-list__title-group">
+      <h1 class="products-list__title">Productos</h1>
+      <p class="products-list__count">{{ filteredProducts.length }} productos encontrados</p>
+    </div>
+    <a class="products-list__add-btn" routerLink="/admin/productos/nuevo">
+      <span class="products-list__add-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14" />
+          <path d="M5 12h14" />
+        </svg>
+      </span>
+      Nuevo Producto
+    </a>
+  </div>
+
+  <div class="products-list__filters">
+    <div class="products-list__search">
+      <span class="products-list__search-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      </span>
+      <input
+        class="products-list__search-input"
+        type="text"
+        placeholder="Buscar productos..."
+        [value]="searchQuery()"
+        (input)="updateSearch($event)"
+      />
+    </div>
+
+    <div class="products-list__filters-group">
+      @for (cat of categories; track cat) {
+        <button
+          class="products-list__filter-chip"
+          [class.products-list__filter-chip--active]="selectedCategory() === cat || (!selectedCategory() && cat === 'Todas')"
+          (click)="selectCategory(cat)"
+        >
+          {{ cat }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <admin-table
+    [columns]="columns"
+    [data]="filteredProducts"
+    [actions]="actions"
+    [emptyMessage]="'No se encontraron productos'"
+  />
+</div>

@@ -1,0 +1,76 @@
+<div class="dashboard">
+  <div class="dashboard__header">
+    <div>
+      <h1 class="dashboard__title">Dashboard</h1>
+      <p class="dashboard__subtitle">Resumen general de tu tienda</p>
+    </div>
+    <span class="dashboard__date">{{ today | date:'EEEE, d MMMM yyyy' }}</span>
+  </div>
+
+  <div class="dashboard__cards">
+    @for (card of statsCards; track card.title) {
+      <admin-card
+        [icon]="card.icon"
+        [title]="card.title"
+        [value]="card.value"
+        [subtitle]="card.subtitle"
+        [trend]="card.trend"
+        [trendValue]="card.trendValue"
+        [color]="card.color"
+      />
+    }
+  </div>
+
+  <div class="dashboard__sections">
+    <div class="dashboard__section">
+      <div class="dashboard__section-header">
+        <h2 class="dashboard__section-title">Pedidos Recientes</h2>
+        <a class="dashboard__section-link" routerLink="/admin/pedidos">Ver todos</a>
+      </div>
+      <table class="dashboard__orders-table">
+        <thead>
+          <tr>
+            <th>Pedido</th>
+            <th>Cliente</th>
+            <th>Fecha</th>
+            <th>Total</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (order of recentOrders; track order.id) {
+            <tr>
+              <td><strong>{{ order.id }}</strong></td>
+              <td>{{ order.customer }}</td>
+              <td>{{ order.date | date:'dd/MM/yyyy' }}</td>
+              <td>{{ order.total | currency:'EUR':'symbol':'1.2-2' }}</td>
+              <td>
+                <span class="dashboard__order-status" [class]="'dashboard__order-status--' + (order.status | lowercase)">
+                  <span class="dashboard__order-dot"></span>
+                  {{ order.status }}
+                </span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="dashboard__section">
+      <div class="dashboard__section-header">
+        <h2 class="dashboard__section-title">Productos Destacados</h2>
+        <a class="dashboard__section-link" routerLink="/admin/productos">Ver todos</a>
+      </div>
+      @for (product of topProducts; track product.name) {
+        <div class="dashboard__product-item">
+          <img class="dashboard__product-img" [src]="product.imageUrl" [alt]="product.name" loading="lazy" />
+          <div class="dashboard__product-info">
+            <div class="dashboard__product-name">{{ product.name }}</div>
+            <div class="dashboard__product-category">{{ product.category }}</div>
+          </div>
+          <span class="dashboard__product-price">{{ product.price | currency:'EUR':'symbol':'1.2-2' }}</span>
+        </div>
+      }
+    </div>
+  </div>
+</div>
