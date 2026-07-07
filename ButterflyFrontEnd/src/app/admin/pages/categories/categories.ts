@@ -1,13 +1,10 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminTable, TableColumn, TableAction } from '../../shared/admin-table';
-import {CategoryService} from '../../../services/category';
+import { CategoryService } from '../../../services/category';
 import { Categoria } from '../../../modelos/categoria';
-interface Category {
-  id: number;
-  name: string;
-  products: number;
-}
+import { CategoriaLista } from '../../../modelos/categoria.total';
+
 
 @Component({
   selector: 'admin-categories',
@@ -15,22 +12,23 @@ interface Category {
   styleUrls: ['./categories.scss'],
   imports: [AdminTable, FormsModule],
 })
-export class Categories implements OnInit{
+export class Categories implements OnInit {
   readonly showModal = signal(false);
-  readonly editingCategory = signal<Category | null>(null);
+  readonly editingCategoria = signal<Categoria | null>(null);
 
   formName = '';
   constructor(private categoriaService: CategoryService) {}
 
   ngOnInit() {
-
+    this.cargarCategorias()
   }
 
   readonly columns: TableColumn[] = [
-    { key: 'name', label: 'Nombre' },
-    { key: 'products', label: 'Total de productos' },
+    { key: 'nombre', label: 'Nombre' },
+    { key: 'cantidad', label: 'Total de productos' },
   ];
 
+  readonly categories = signal<CategoriaLista[]>([]);
   readonly actions: TableAction[] = [
     {
       label: 'Editar',
@@ -46,19 +44,8 @@ export class Categories implements OnInit{
     },
   ];
 
-  readonly categories = signal<Category[]>([
-    { id: 1, name: 'Blusas', products: 12 },
-    { id: 2, name: 'Vestidos', products: 24 },
-    { id: 3, name: 'Faldas', products: 8 },
-    { id: 4, name: 'Chaquetas', products: 6 },
-    { id: 5, name: 'Tops', products: 10 },
-    { id: 6, name: 'Pantalones', products: 7 },
-    { id: 7, name: 'Abrigos', products: 4 },
-    { id: 8, name: 'Accesorios', products: 0 },
-  ]);
-
   get isEditing(): boolean {
-    return this.editingCategory() !== null;
+    return this.editingCategoria() !== null;
   }
 
   get modalTitle(): string {
@@ -66,47 +53,69 @@ export class Categories implements OnInit{
   }
 
   openNewModal(): void {
-    this.editingCategory.set(null);
+    this.editingCategoria.set(null);
     this.formName = '';
     this.showModal.set(true);
   }
 
-  editCategory(category: Category): void {
-    this.editingCategory.set(category);
-    this.formName = category.name;
+  editCategoria(Categoria: Categoria): void {
+    this.editingCategoria.set(Categoria);
+    this.formName = Categoria.name;
     this.showModal.set(true);
   }
 
-  saveCategory(): void {
-    const name = this.formName.trim();
+  saveCategoria(): void {
+    const name = this.formName.trim().toLowerCase();
     if (!name) return;
 
     if (this.isEditing) {
-      const cat = this.editingCategory()!;
-      this.categories.update((list) => list.map((c) => (c.id === cat.id ? { ...c, name } : c)));
+      const cat = this.editingCategoria()!;
+      //this.categories.update((list) => list.map((c) => (c.id === cat.id ? { ...c, name } : c)));
+
     } else {
-      const newId = Math.max(0, ...this.categories().map((c) => c.id)) + 1;
-      this.categories.update((list) => [...list, { id: newId, name, products: 0 }]);
+      //const newId = Math.max(0, ...this.categories().map((c) => c.id)) + 1;
+      //this.categories.update((list) => [...list, { id: newId, name, products: 0 }]);
+
+      // Cambia esto:
+      this.categoriaService.crearCategoria({ nombre: name }).subscribe({
+        next: (categoriData: any) => {
+          console.log(categoriData);
+          const cat = categoriData.data;
+          this.categories.update((list) => [...list, cat]);
+          this.closeModal();
+        },
+        error: (err) => {
+          console.error('Error ' + err);
+        },
+      });
     }
-
-    this.closeModal();
   }
-
-  deleteCategory(category: Category): void {
-    this.categories.update((list) => list.filter((c) => c.id !== category.id));
+  cargarCategorias(){
+    this.categoriaService.listarCategorias().subscribe({
+      next:(categoriasData: any)=>{
+        const listaLimpia = categoriasData.data
+        this.categories.set(listaLimpia)
+      },
+      error:(err)=>{
+        console.error('Error ' + err);
+      }
+    })
+  }
+  deleteCategoria(Categoria: Categoria): void {
+    //this.categories.update((list) => list.filter((c) => c.id !== Categoria.id));
   }
 
   closeModal(): void {
     this.showModal.set(false);
-    this.editingCategory.set(null);
+    this.editingCategoria.set(null);
     this.formName = '';
   }
 
   onAction(actionKey: string, row: any): void {
     if (actionKey === 'edit') {
-      this.editCategory(row as Category);
+      this.editCategoria(row as Categoria);
     } else if (actionKey === 'delete') {
-      this.deleteCategory(row as Category);
+      this.deleteCategoria(row as Categoria);
     }
   }
 }

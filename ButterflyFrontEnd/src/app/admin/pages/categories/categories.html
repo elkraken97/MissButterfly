@@ -35,16 +35,16 @@
           </button>
         </div>
 
-        <form class="categories__modal-form" (ngSubmit)="saveCategory()" #categoryForm="ngForm">
+        <form class="categories__modal-form" (ngSubmit)="saveCategoria()" #CategoriaForm="ngForm">
           <div class="categories__modal-body">
             <div class="categories__field">
-              <label class="categories__label" for="categoryName">Nombre de la categoría</label>
+              <label class="categories__label" for="CategoriaName">Nombre de la categoría</label>
               <input
-                id="categoryName"
+                id="CategoriaName"
                 class="categories__input"
                 type="text"
                 [(ngModel)]="formName"
-                name="categoryName"
+                name="CategoriaName"
                 placeholder="Ej: Blusas, Vestidos, Faldas..."
                 required
                 autofocus

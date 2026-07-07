@@ -9,22 +9,5 @@ services:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
-  backend:
-    build: .
-    ports:
-      - '8080:8080'
-    depends_on:
-      - postgres
-    environment:
-      # Spring Boot tomará estas variables automáticamente
-      # Nota cómo usamos "postgres" en la URL en lugar de "localhost"
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${DB_NAME}
-      - SPRING_DATASOURCE_USERNAME=${DB_USER}
-      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
-      # Opcional: si usas JPA/Hibernate para crear tablas automáticamente
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-
 volumes:
   postgres_data:
-

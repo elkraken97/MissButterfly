@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/enviroment';
+import { Categoria } from '../modelos/categoria';
 export interface Category {
   id: number;
   nombre: string;
@@ -19,14 +20,16 @@ export class CategoryService {
 
   /** Obtiene el listado completo de categorías */
   //obtenerCategorias(): Observable<Category[]> {
-    //return this.http.get<Category[]>(this.baseUrl);
-//}
+  //return this.http.get<Category[]>(this.baseUrl);
+  //}
 
   /** Crea una nueva categoría */
-  crearCategoria(data: Omit<Category, 'id'>): Observable<Category> {
-    return this.http.post<Category>(this.baseUrl, data);
+  crearCategoria(categoryData: { nombre: string }): Observable<Categoria> {
+    return this.http.post<Categoria>(this.baseUrl, categoryData);
   }
-
+    listarCategorias(): Observable<Categoria[]> {
+    return this.http.get<Categoria[]>(`${this.baseUrl}/lista`);
+    }
   // ── Métodos adicionales (descomentar al conectar el backend) ──────────
 
   // actualizarCategoria(id: number, data: Partial<Category>): Observable<Category> {
