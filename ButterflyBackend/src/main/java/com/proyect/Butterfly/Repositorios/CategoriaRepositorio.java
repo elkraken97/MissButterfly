@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CategoriaRepositorio extends JpaRepository<Categoria,Integer> {
@@ -18,4 +19,5 @@ public interface CategoriaRepositorio extends JpaRepository<Categoria,Integer> {
             "GROUP BY c.id, c.nombre")
     List<CategoriaTotalDto> listarCategoriasConTotal();
 
+    Optional<Categoria> findByNombre(String nombre);
 }

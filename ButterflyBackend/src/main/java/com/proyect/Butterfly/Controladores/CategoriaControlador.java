@@ -2,6 +2,7 @@ package com.proyect.Butterfly.Controladores;
 
 import com.proyect.Butterfly.Dtos.CategoriaTotalDto;
 import com.proyect.Butterfly.Dtos.DtoNuevaCategoria;
+import com.proyect.Butterfly.Dtos.EditarCategoriaDto;
 import com.proyect.Butterfly.Modelos.Categoria;
 import com.proyect.Butterfly.Servicios.CategoriaServicio;
 import com.proyect.Butterfly.SuccesDtos.SuccessResponse;
@@ -30,4 +31,10 @@ public class CategoriaControlador {
         List<CategoriaTotalDto> lista = categoriaServicio.listaDeCategorias();
         return ResponseEntity.ok(new SuccessResponse<>(200,"Se han devuelto las categorias",lista,LocalDateTime.now()));
     }
+    @PutMapping()
+    public ResponseEntity<SuccessResponse<Categoria>> editarCategoria(@Valid @RequestBody EditarCategoriaDto editarCategoriaDto){
+        Categoria categoriaEditadaDto = categoriaServicio.editarCategoria(editarCategoriaDto);
+        return ResponseEntity.ok(new SuccessResponse<>(200,"Categoria editada correctamente",categoriaEditadaDto,LocalDateTime.now()));
+    }
+
 }

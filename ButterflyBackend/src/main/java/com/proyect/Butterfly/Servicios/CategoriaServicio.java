@@ -2,7 +2,9 @@ package com.proyect.Butterfly.Servicios;
 
 import com.proyect.Butterfly.Dtos.CategoriaTotalDto;
 import com.proyect.Butterfly.Dtos.DtoNuevaCategoria;
+import com.proyect.Butterfly.Dtos.EditarCategoriaDto;
 import com.proyect.Butterfly.Exceptions.CategoriaExistenteException;
+import com.proyect.Butterfly.Exceptions.CategoriaNoEncontrada;
 import com.proyect.Butterfly.Exceptions.DtoRecibidoVacio;
 import com.proyect.Butterfly.Modelos.Categoria;
 import com.proyect.Butterfly.Repositorios.CategoriaRepositorio;
@@ -38,6 +40,23 @@ public class CategoriaServicio {
 
     public List<CategoriaTotalDto> listaDeCategorias(){
         return categoriaRepositorio.listarCategoriasConTotal();
+    }
+    public Categoria editarCategoria(EditarCategoriaDto editarCategoriaDto){
+        Categoria categoria = categoriaRepositorio.findByNombre(editarCategoriaDto.getNombreAnterior()).orElseThrow(()->new CategoriaNoEncontrada(editarCategoriaDto.getNombreAnterior()));
+        if (editarCategoriaDto.getNombreNuevo().isBlank()||editarCategoriaDto.getNombreAnterior().isBlank()) {
+
+            throw new DtoRecibidoVacio();
+
+        }
+        if (categoriaRepositorio.existsByNombre(editarCategoriaDto.getNombreNuevo())){
+            throw new CategoriaExistenteException();
+        }
+
+        categoria.setNombre(editarCategoriaDto.getNombreNuevo());
+        categoriaRepositorio.save(categoria);
+        return categoria;
+
+
     }
 
 }
