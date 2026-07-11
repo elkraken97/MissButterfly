@@ -9,6 +9,8 @@ import com.proyect.Butterfly.Exceptions.DtoRecibidoVacio;
 import com.proyect.Butterfly.Modelos.Categoria;
 import com.proyect.Butterfly.Repositorios.CategoriaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,9 +40,11 @@ public class CategoriaServicio {
         return categoriaRepositorio.save(categoria);
     }
 
-    public List<CategoriaTotalDto> listaDeCategorias(){
-        return categoriaRepositorio.listarCategoriasConTotal();
+    public Page<CategoriaTotalDto> listaDeCategorias(Pageable pageable){
+        return categoriaRepositorio.listarCategoriasConTotal(pageable);
     }
+
+
     public Categoria editarCategoria(EditarCategoriaDto editarCategoriaDto){
         Categoria categoria = categoriaRepositorio.findByNombre(editarCategoriaDto.getNombreAnterior()).orElseThrow(()->new CategoriaNoEncontrada(editarCategoriaDto.getNombreAnterior()));
         if (editarCategoriaDto.getNombreNuevo().isBlank()||editarCategoriaDto.getNombreAnterior().isBlank()) {

@@ -1,4 +1,5 @@
+/** DTO devuelto por el backend: CategoriaTotalDto con nombre y cantidad */
 export interface CategoriaLista {
-  name: string; // Ojo: asegúrate que sea igual al campo de tu DTO
+  nombre: string;
   cantidad: number;
 }

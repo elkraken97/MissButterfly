@@ -17,9 +17,64 @@
     [columns]="columns"
     [data]="categories()"
     [actions]="actions"
+    [loading]="isLoading()"
     [emptyMessage]="'No hay categorías disponibles'"
     (action)="onAction($event.key, $event.row)"
   />
+
+  <!-- Pagination -->
+  @if (totalPages() > 0) {
+    <div class="categories__pagination">
+      <div class="categories__pagination-info">
+        {{ totalItems() }} categorías en total
+        @if (totalPages() > 1) {
+          · Página {{ currentPage() }} de {{ totalPages() }}
+        }
+      </div>
+
+      <div class="categories__pagination-controls">
+        <button
+          class="categories__page-btn categories__page-btn--nav"
+          [disabled]="isFirstPage"
+          (click)="previousPage()"
+          aria-label="Página anterior"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+          Anterior
+        </button>
+
+        @for (page of pageNumbers; track $index) {
+          @if (page < 0) {
+            <span class="categories__page-ellipsis">…</span>
+          } @else {
+            <button
+              class="categories__page-btn"
+              [class.categories__page-btn--active]="page === currentPage()"
+              (click)="goToPage(page)"
+              [attr.aria-label]="'Ir a página ' + page"
+              [attr.aria-current]="page === currentPage() ? 'page' : null"
+            >
+              {{ page }}
+            </button>
+          }
+        }
+
+        <button
+          class="categories__page-btn categories__page-btn--nav"
+          [disabled]="isLastPage"
+          (click)="nextPage()"
+          aria-label="Página siguiente"
+        >
+          Siguiente
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  }
 
   <!-- Modal -->
   @if (showModal()) {
@@ -59,7 +114,7 @@
             <button
               type="submit"
               class="categories__btn categories__btn--primary"
-              [disabled]="!formName.trim()"
+              [disabled]="!(formName?.trim())"
             >
               {{ isEditing ? 'Guardar Cambios' : 'Crear Categoría' }}
             </button>
