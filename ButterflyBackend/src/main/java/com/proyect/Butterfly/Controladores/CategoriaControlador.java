@@ -41,5 +41,11 @@ public class CategoriaControlador {
         Categoria categoriaEditadaDto = categoriaServicio.editarCategoria(editarCategoriaDto);
         return ResponseEntity.ok(new SuccessResponse<>(200,"Categoria editada correctamente",categoriaEditadaDto,LocalDateTime.now()));
     }
+    @DeleteMapping("/{nombre}")
+    public ResponseEntity<SuccessResponse<Categoria>> eliminarCategoria(@PathVariable String nombre){
+        Categoria categoria = categoriaServicio.eliminarCategoria(nombre);
+        return ResponseEntity.ok(new SuccessResponse<>(200,"Se elimino la categoria",categoria,LocalDateTime.now()));
+    }
+
 
 }

@@ -62,5 +62,10 @@ public class CategoriaServicio {
 
 
     }
+    public Categoria eliminarCategoria(String nombre){
+        Categoria cat =  categoriaRepositorio.findByNombre(nombre).orElseThrow(()->new CategoriaNoEncontrada(nombre));
+        cat.setActivo(false);
+        return categoriaRepositorio.save(cat);
+    }
 
 }

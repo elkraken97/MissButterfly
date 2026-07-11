@@ -1,0 +1,1 @@
+alter table categorias add column activo boolean default true;

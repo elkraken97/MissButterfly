@@ -17,7 +17,7 @@ public interface CategoriaRepositorio extends JpaRepository<Categoria,Integer> {
     boolean existsByNombre(String nombre);
 
     @Query(
-            value = "SELECT new com.proyect.Butterfly.Dtos.CategoriaTotalDto(c.nombre, COUNT(p)) " +
+            value = "SELECT new com.proyect.Butterfly.Dtos.CategoriaTotalDto(c.nombre, COUNT(p),c.activo) " +
                     "FROM Categoria c LEFT JOIN Producto p ON p.idCategoria = c " +
                     "GROUP BY c.id, c.nombre",
             countQuery = "SELECT COUNT(c) FROM Categoria c"
@@ -25,4 +25,5 @@ public interface CategoriaRepositorio extends JpaRepository<Categoria,Integer> {
     Page<CategoriaTotalDto> listarCategoriasConTotal(Pageable pageable);
 
     Optional<Categoria> findByNombre(String nombre);
+
 }

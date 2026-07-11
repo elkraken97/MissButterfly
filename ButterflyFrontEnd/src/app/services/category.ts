@@ -96,7 +96,7 @@ export class CategoryService {
     return this.http.put<Category>(`${this.baseUrl}`, categoryChange);
   }
 
-  // eliminarCategoria(id: number): Observable<void> {
-  //   return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  // }
+   eliminarCategoria(nombre:string): Observable<void> {
+     return this.http.delete<void>(`${this.baseUrl}/${nombre}`);
+   }
 }

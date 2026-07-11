@@ -11,4 +11,5 @@ import lombok.NoArgsConstructor;
 public class CategoriaTotalDto {
     private String nombre;
     private Long cantidad;
+    private boolean activo;
 }

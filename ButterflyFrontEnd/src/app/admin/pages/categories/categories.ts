@@ -106,7 +106,9 @@ export class Categories implements OnInit {
     this.categoriaService.listarCategorias(targetPage, this.pageSize()).subscribe({
       next: (response: SpringPageResponse<CategoriaLista>) => {
         const page = response.data;
-        this.categories.set(page.content);
+        // Mostrar solo categorías activas (las inactivas se tratarán como eliminadas)
+        const activeCategories = page.content.filter(c => c.activo);
+        this.categories.set(activeCategories);
         this.currentPage.set(page.number + 1); // Spring usa 0-indexado
         this.totalPages.set(page.totalPages);
         this.totalItems.set(page.totalElements);
@@ -174,7 +176,12 @@ export class Categories implements OnInit {
   }
 
   deleteCategoria(categoria: Categoria): void {
-    // Placeholder — conectar con el endpoint DELETE cuando esté disponible
+    this.categoriaService.eliminarCategoria(categoria.nombre).subscribe({
+      next:()=>{
+        this.cargarCategorias(1)
+      },
+      error: (err) => console.error('Error al eliminar:', err),
+    });
   }
 
   closeModal(): void {
