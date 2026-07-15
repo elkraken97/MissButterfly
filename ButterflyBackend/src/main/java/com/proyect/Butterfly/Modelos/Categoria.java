@@ -20,4 +20,7 @@ private Integer id;
 
     @Column(name = "ultimo_sku")
     private Integer ultimosku;
+
+    @Column(name = "activo")
+    private boolean activo;
 }
