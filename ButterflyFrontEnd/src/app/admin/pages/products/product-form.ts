@@ -1,5 +1,4 @@
 import { Component, signal } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 
@@ -7,22 +6,22 @@ import { RouterLink, ActivatedRoute } from '@angular/router';
   selector: 'admin-product-form',
   templateUrl: './product-form.html',
   styleUrls: ['./product-form.scss'],
-  imports: [RouterLink, FormsModule, CurrencyPipe],
+  imports: [RouterLink, FormsModule],
 })
 export class ProductForm {
   readonly isEditing = signal(false);
   readonly pageTitle = signal('');
 
+  /* ── Lists (placeholder — vendrán del backend) ────────────────────── */
   readonly categories = ['Blusas', 'Vestidos', 'Faldas', 'Chaquetas', 'Tops', 'Pantalones', 'Abrigos'];
+  readonly brands = ['Marco Polo', 'Zara', 'H&M', 'Mango', 'Pull&Bear', 'Adidas', 'Nike', "Levi's"];
 
   form = {
     name: '',
     description: '',
-    price: null as number | null,
-    stock: null as number | null,
+    brand: '',
     category: '',
-    status: 'Activo',
-    images: [] as string[],
+    available: true,
   };
 
   constructor(private route: ActivatedRoute) {
@@ -35,13 +34,9 @@ export class ProductForm {
       this.form = {
         name: 'Vestido Floral Primavera',
         description: 'Vestido largo con estampado botánico, corte evasé y cintura ajustable. Confeccionado en tejido de viscosa ligera con forro interior.',
-        price: 245,
-        stock: 15,
+        brand: 'Marco Polo',
         category: 'Vestidos',
-        status: 'Activo',
-        images: [
-          'https://picsum.photos/seed/fashion-dress-floral/600/800',
-        ],
+        available: true,
       };
     } else {
       this.isEditing.set(false);
@@ -49,20 +44,11 @@ export class ProductForm {
     }
   }
 
-  addImage(): void {
-    // Simular agregar imagen
-    this.form.images = [...this.form.images, ''];
-  }
-
-  removeImage(index: number): void {
-    this.form.images = this.form.images.filter((_, i) => i !== index);
-  }
-
   saveProduct(): void {
-    // Placeholder - sin implementación
+    // Placeholder — conectar con el backend
   }
 
   cancel(): void {
-    // Placeholder - navegar de vuelta
+    // Placeholder — navegar de vuelta
   }
 }
