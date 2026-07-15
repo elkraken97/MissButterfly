@@ -1,8 +1,8 @@
 package com.proyect.Butterfly.Controladores;
 
-import com.proyect.Butterfly.Dtos.CategoriaTotalDto;
-import com.proyect.Butterfly.Dtos.DtoNuevaCategoria;
-import com.proyect.Butterfly.Dtos.EditarCategoriaDto;
+import com.proyect.Butterfly.Dtos.CategoriasDtos.CategoriaTotalDto;
+import com.proyect.Butterfly.Dtos.CategoriasDtos.DtoNuevaCategoria;
+import com.proyect.Butterfly.Dtos.CategoriasDtos.EditarCategoriaDto;
 import com.proyect.Butterfly.Modelos.Categoria;
 import com.proyect.Butterfly.Servicios.CategoriaServicio;
 import com.proyect.Butterfly.SuccesDtos.SuccessResponse;
@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/categorias")

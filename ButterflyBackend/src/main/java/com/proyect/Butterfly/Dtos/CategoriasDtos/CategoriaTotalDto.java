@@ -1,4 +1,4 @@
-package com.proyect.Butterfly.Dtos;
+package com.proyect.Butterfly.Dtos.CategoriasDtos;
 
 
 import lombok.AllArgsConstructor;

@@ -22,4 +22,6 @@ public class Producto {
     private Categoria idCategoria;
     @Column(name = "disponible")
     private Boolean disponible;
+    @Column(name = "descripcion",length = 500)
+    private String descripcion;
 }
