@@ -19,6 +19,7 @@
     [actions]="actions"
     [loading]="isLoading()"
     [emptyMessage]="'No hay categorías disponibles'"
+    [disabledFn]="isRowDisabled"
     (action)="onAction($event.key, $event.row)"
   />
 

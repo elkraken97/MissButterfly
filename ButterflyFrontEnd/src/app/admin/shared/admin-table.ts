@@ -29,10 +29,12 @@ export class AdminTable {
   readonly selectable = input(false);
   readonly loading = input(false);
   readonly emptyMessage = input('No hay datos disponibles');
+  readonly disabledFn = input<(row: any) => boolean>(() => false);
 
   readonly action = output<{ key: string; row: any }>();
 
   onAction(key: string, row: any): void {
+    if (this.disabledFn()(row)) return;
     this.action.emit({ key, row });
   }
 }

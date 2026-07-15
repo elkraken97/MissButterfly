@@ -106,9 +106,7 @@ export class Categories implements OnInit {
     this.categoriaService.listarCategorias(targetPage, this.pageSize()).subscribe({
       next: (response: SpringPageResponse<CategoriaLista>) => {
         const page = response.data;
-        // Mostrar solo categorías activas (las inactivas se tratarán como eliminadas)
-        const activeCategories = page.content.filter(c => c.activo);
-        this.categories.set(activeCategories);
+        this.categories.set(page.content);
         this.currentPage.set(page.number + 1); // Spring usa 0-indexado
         this.totalPages.set(page.totalPages);
         this.totalItems.set(page.totalElements);
@@ -190,7 +188,16 @@ export class Categories implements OnInit {
     this.formName = '';
   }
 
+  /** Función que determina si una fila está deshabilitada (inactiva) */
+  readonly isRowDisabled = (row: any): boolean => {
+    const categoria = row as CategoriaLista;
+    return categoria.activo === false;
+  };
+
   onAction(actionKey: string, row: any): void {
+    // Doble seguridad: no permitir acciones en filas inactivas
+    if (this.isRowDisabled(row)) return;
+
     if (actionKey === 'edit') {
       this.editCategoria(row as CategoriaLista);
     } else if (actionKey === 'delete') {

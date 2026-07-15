@@ -37,7 +37,7 @@
         </tr>
       }
       @for (row of data(); track row.id ?? $index) {
-        <tr class="admin-table__row admin-table__row--body">
+        <tr class="admin-table__row admin-table__row--body" [class.admin-table__row--inactive]="disabledFn()(row)">
           @if (selectable()) {
             <td class="admin-table__cell admin-table__cell--check">
               <input type="checkbox" class="admin-table__checkbox" />
@@ -84,6 +84,7 @@
                   <button
                     [className]="'admin-table__action-btn admin-table__action-btn--' + (action.color || 'default')"
                     [attr.aria-label]="action.label"
+                    [disabled]="disabledFn()(row)"
                     (click)="onAction(action.key, row)"
                   >
                     @switch (action.key) {
