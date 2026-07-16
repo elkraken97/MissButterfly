@@ -1,5 +1,5 @@
 
-create table marcas(id integer primary key, nombre varchar(100) not null ,activo boolean default true,
+create table marcas(id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY, nombre varchar(100) not null ,activo boolean default true,
 creado_el timestamp with time zone default CURRENT_TIMESTAMP);
 -- 1. Modificar la columna 'creado_el'
 ALTER TABLE usuarios
@@ -13,6 +13,6 @@ ALTER COLUMN actualizado_el
     TYPE TIMESTAMP WITH TIME ZONE
     USING actualizado_el AT TIME ZONE 'UTC';
 --creacion de marca y descripcion
-alter table productos add column id_marca integer;
+alter table productos add column id_marca BIGINT;
 alter table productos add constraint fk_marca_productos foreign key (id_marca) references marcas(id);
 alter table productos add column descripcion varchar(500);

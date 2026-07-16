@@ -13,13 +13,13 @@ public class Categoria {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name = "id")
-private Integer id;
+private Long id;
 
     @Column(name = "nombre",nullable = false,length = 100)
     private String nombre;
 
     @Column(name = "ultimo_sku")
-    private Integer ultimosku;
+    private Long ultimosku;
 
     @Column(name = "activo")
     private boolean activo;

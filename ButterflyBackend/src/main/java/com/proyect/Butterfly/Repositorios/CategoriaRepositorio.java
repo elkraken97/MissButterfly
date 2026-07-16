@@ -12,12 +12,12 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CategoriaRepositorio extends JpaRepository<Categoria,Integer> {
+public interface CategoriaRepositorio extends JpaRepository<Categoria,Long> {
     boolean existsByNombre(String nombre);
 
     @Query(
             value = "SELECT new com.proyect.Butterfly.Dtos.CategoriasDtos.CategoriaTotalDto(c.nombre, COUNT(p),c.activo) " +
-                    "FROM Categoria c LEFT JOIN Producto p ON p.idCategoria = c " +
+                    "FROM Categoria c LEFT JOIN Producto p ON p.categoriaId = c " +
                     "GROUP BY c.id, c.nombre",
             countQuery = "SELECT COUNT(c) FROM Categoria c"
     )

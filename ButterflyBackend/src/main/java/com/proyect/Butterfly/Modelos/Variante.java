@@ -16,7 +16,7 @@ public class Variante {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Column(name = "color",length = 50,nullable = false)
     private String color;
     @Column(name = "talla",length = 50,nullable = false)

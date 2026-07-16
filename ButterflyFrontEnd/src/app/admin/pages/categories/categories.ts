@@ -111,6 +111,7 @@ export class Categories implements OnInit {
         this.totalPages.set(page.totalPages);
         this.totalItems.set(page.totalElements);
         this.isLoading.set(false);
+
       },
       error: (err) => {
         console.error('Error al cargar categorías:', err);
