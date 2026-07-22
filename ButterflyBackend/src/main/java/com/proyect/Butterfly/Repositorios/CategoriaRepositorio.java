@@ -1,4 +1,5 @@
 package com.proyect.Butterfly.Repositorios;
+import com.proyect.Butterfly.Dtos.CategoriasDtos.CategoriaConIdDto;
 import com.proyect.Butterfly.Dtos.CategoriasDtos.CategoriaTotalDto;
 
 import com.proyect.Butterfly.Modelos.Categoria;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -24,5 +26,10 @@ public interface CategoriaRepositorio extends JpaRepository<Categoria,Long> {
     Page<CategoriaTotalDto> listarCategoriasConTotal(Pageable pageable);
 
     Optional<Categoria> findByNombre(String nombre);
+
+
+    @Query(value = "SELECT new com.proyect.Butterfly.Dtos.CategoriasDtos.CategoriaConIdDto(c.nombre,c.id)" +
+            "FROM Categoria c")
+    List<CategoriaConIdDto> categoriasConId();
 
 }

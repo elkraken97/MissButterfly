@@ -1,6 +1,7 @@
 package com.proyect.Butterfly.Servicios;
 
 import com.proyect.Butterfly.Dtos.ProductosDtos.CrearProductoDto;
+import com.proyect.Butterfly.Dtos.ProductosDtos.ProductoCreadoDto;
 import com.proyect.Butterfly.Exceptions.CategoriaExcepciones.CategoriaNoEncontradaId;
 import com.proyect.Butterfly.Exceptions.CategoriaExcepciones.CategoriaNoEncontradaNombre;
 import com.proyect.Butterfly.Exceptions.MarcaExcepciones.MarcaNoEncontradaExcepcion;
@@ -26,8 +27,8 @@ public class ProductoServicio {
     @Autowired
     private CategoriaRepositorio categoriaRepositorio;
 
-    public Producto crearProducto(CrearProductoDto crearProductoDto){
-
+    public ProductoCreadoDto crearProducto(CrearProductoDto crearProductoDto){
+        ProductoCreadoDto creadoDto = new ProductoCreadoDto();
         if (productoRepositorio.existsByNombre(crearProductoDto.getNombre())){
             throw new ProductoYaExistenteException(crearProductoDto.getNombre());
         }
@@ -43,8 +44,13 @@ public class ProductoServicio {
               new CategoriaNoEncontradaId(crearProductoDto.getCategoriaId()));
         producto.setMarcaId(marcaDelProducto);
         producto.setCategoriaId(categoriaDelProducto);
+        productoRepositorio.save(producto);
 
-     return  productoRepositorio.save(producto);
+
+        creadoDto.setCategoria(categoriaDelProducto.getNombre());
+        creadoDto.setMarca(marcaDelProducto.getNombre());
+        creadoDto.setNombre(producto.getNombre());
+     return  creadoDto;
 
 
     }

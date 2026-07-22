@@ -1,4 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/enviroment';
+import { CrearProductoRequest, ProductoCreadoResponse } from '../modelos/producto';
 
 export interface Product {
   id: number;
@@ -13,6 +17,9 @@ export interface Product {
   providedIn: 'root',
 })
 export class ProductService {
+  private readonly baseUrl = `${environment.apiUrl}/api/v1/admin/productos`;
+  private readonly http = inject(HttpClient);
+
   private products: Product[] = [
     {
       id: 1,
@@ -41,7 +48,8 @@ export class ProductService {
     {
       id: 4,
       name: 'Chaqueta Tweed Clásica',
-      description: 'Chaqueta de tweed con bordes de hilo dorado, bolsillos aplicados y forro de seda.',
+      description:
+        'Chaqueta de tweed con bordes de hilo dorado, bolsillos aplicados y forro de seda.',
       price: 329,
       imageUrl: 'https://picsum.photos/seed/fashion-jacket-tweed/600/800',
       category: 'Chaquetas',
@@ -80,11 +88,17 @@ export class ProductService {
     },
   ];
 
+  /** Devuelve los productos mock para el catálogo público */
   getProducts(): Product[] {
     return this.products;
   }
 
   getProductById(id: number): Product | undefined {
     return this.products.find((product) => product.id === id);
+  }
+
+  /** Crea un nuevo producto vía API */
+  createProduct(productData: CrearProductoRequest): Observable<ProductoCreadoResponse> {
+    return this.http.post<ProductoCreadoResponse>(this.baseUrl, productData);
   }
 }

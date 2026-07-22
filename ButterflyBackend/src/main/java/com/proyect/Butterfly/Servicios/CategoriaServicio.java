@@ -1,5 +1,6 @@
 package com.proyect.Butterfly.Servicios;
 
+import com.proyect.Butterfly.Dtos.CategoriasDtos.CategoriaConIdDto;
 import com.proyect.Butterfly.Dtos.CategoriasDtos.CategoriaTotalDto;
 import com.proyect.Butterfly.Dtos.CategoriasDtos.DtoNuevaCategoria;
 import com.proyect.Butterfly.Dtos.CategoriasDtos.EditarCategoriaDto;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CategoriaServicio {
@@ -64,6 +67,12 @@ public class CategoriaServicio {
         Categoria cat =  categoriaRepositorio.findByNombre(nombre).orElseThrow(()->new CategoriaNoEncontradaNombre(nombre));
         cat.setActivo(false);
         return categoriaRepositorio.save(cat);
+    }
+
+    public List<CategoriaConIdDto> categoriasDisponibles(){
+
+        return categoriaRepositorio.categoriasConId();
+
     }
 
 }

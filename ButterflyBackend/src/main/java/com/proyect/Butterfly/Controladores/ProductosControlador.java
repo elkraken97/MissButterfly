@@ -1,6 +1,7 @@
 package com.proyect.Butterfly.Controladores;
 
 import com.proyect.Butterfly.Dtos.ProductosDtos.CrearProductoDto;
+import com.proyect.Butterfly.Dtos.ProductosDtos.ProductoCreadoDto;
 import com.proyect.Butterfly.Modelos.Producto;
 import com.proyect.Butterfly.Servicios.ProductoServicio;
 import com.proyect.Butterfly.SuccesDtos.SuccessResponse;
@@ -23,9 +24,9 @@ public class ProductosControlador {
     private ProductoServicio productoServicio;
 
     @PostMapping
-    public ResponseEntity<SuccessResponse<Producto>> crearProducto(@RequestBody @Valid CrearProductoDto crearProductoDto){
+    public ResponseEntity<SuccessResponse<ProductoCreadoDto>> crearProducto(@RequestBody @Valid CrearProductoDto crearProductoDto){
 
-       Producto producto = productoServicio.crearProducto(crearProductoDto);
+       ProductoCreadoDto producto = productoServicio.crearProducto(crearProductoDto);
        return ResponseEntity.ok(new SuccessResponse<>(200,"Producto creado correctamente",producto, LocalDateTime.now()));
 
     }

@@ -1,5 +1,6 @@
 package com.proyect.Butterfly.Controladores;
 
+import com.proyect.Butterfly.Dtos.CategoriasDtos.CategoriaConIdDto;
 import com.proyect.Butterfly.Dtos.CategoriasDtos.CategoriaTotalDto;
 import com.proyect.Butterfly.Dtos.CategoriasDtos.DtoNuevaCategoria;
 import com.proyect.Butterfly.Dtos.CategoriasDtos.EditarCategoriaDto;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/categorias")
@@ -45,6 +47,8 @@ public class CategoriaControlador {
         Categoria categoria = categoriaServicio.eliminarCategoria(nombre);
         return ResponseEntity.ok(new SuccessResponse<>(200,"Se elimino la categoria",categoria,LocalDateTime.now()));
     }
-
-
+    @GetMapping("/listaForm")
+    public ResponseEntity<SuccessResponse<List<CategoriaConIdDto>>> categoriasParaForm(){
+       return ResponseEntity.ok(new SuccessResponse<>(200,"Categorias para el formulario (disponibles)",categoriaServicio.categoriasDisponibles(),LocalDateTime.now()));
+    }
 }

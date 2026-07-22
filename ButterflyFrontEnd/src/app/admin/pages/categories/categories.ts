@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminTable, TableColumn, TableAction } from '../../shared/admin-table';
-import { CategoryService, SpringPageResponse } from '../../../services/category';
+import { CategoryService, SpringPageResponse } from '../../../services/category.service';
 import { Categoria } from '../../../modelos/categoria';
 import { CategoriaLista } from '../../../modelos/categoria.total';
 
