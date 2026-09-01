@@ -7,7 +7,9 @@ import com.proyect.Butterfly.Modelos.Categoria;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -31,5 +33,8 @@ public interface CategoriaRepositorio extends JpaRepository<Categoria,Long> {
     @Query(value = "SELECT new com.proyect.Butterfly.Dtos.CategoriasDtos.CategoriaConIdDto(c.nombre,c.id)" +
             "FROM Categoria c")
     List<CategoriaConIdDto> categoriasConId();
+
+    @Query(value = "UPDATE categorias SET ultimo_sku = ultimo_sku + 1 WHERE id = :id RETURNING ultimo_sku", nativeQuery = true)
+    Long incrementarYObtenerUltimoSku(@Param("id") Long categoriaId);
 
 }

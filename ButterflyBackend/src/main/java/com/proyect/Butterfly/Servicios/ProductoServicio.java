@@ -2,6 +2,7 @@ package com.proyect.Butterfly.Servicios;
 
 import com.proyect.Butterfly.Dtos.ProductosDtos.CrearProductoDto;
 import com.proyect.Butterfly.Dtos.ProductosDtos.ProductoCreadoDto;
+import com.proyect.Butterfly.Dtos.ProductosDtos.ProductoEncontradoDto;
 import com.proyect.Butterfly.Exceptions.CategoriaExcepciones.CategoriaNoEncontradaId;
 import com.proyect.Butterfly.Exceptions.CategoriaExcepciones.CategoriaNoEncontradaNombre;
 import com.proyect.Butterfly.Exceptions.MarcaExcepciones.MarcaNoEncontradaExcepcion;
@@ -15,6 +16,8 @@ import com.proyect.Butterfly.Repositorios.ProductoRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductoServicio {
 
@@ -26,6 +29,15 @@ public class ProductoServicio {
 
     @Autowired
     private CategoriaRepositorio categoriaRepositorio;
+
+    public List<ProductoEncontradoDto> buscarProductoPorNombre(String nombre){
+        System.out.println(nombre);
+        return productoRepositorio.findByNombreContainingIgnoreCase(nombre).stream()
+                .map(producto ->
+                        new ProductoEncontradoDto(producto.getNombre(), producto.getId()))
+                .toList();
+    }
+
 
     public ProductoCreadoDto crearProducto(CrearProductoDto crearProductoDto){
         ProductoCreadoDto creadoDto = new ProductoCreadoDto();

@@ -31,4 +31,7 @@ public class Variante {
     @JoinColumn(name = "producto_id")
     private Producto productoId;
 
+    @Column(name = "urlimagen")
+    private String imagenUrl;
+
 }

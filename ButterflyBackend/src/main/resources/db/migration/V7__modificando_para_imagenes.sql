@@ -1,0 +1,1 @@
+alter table variantes add column urlImagen text;
