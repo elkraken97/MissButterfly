@@ -1,13 +1,70 @@
 package com.proyect.Butterfly.Servicios;
 
+import com.proyect.Butterfly.Dtos.ProductosDtos.CrearProductoDto;
+import com.proyect.Butterfly.Dtos.ProductosDtos.ProductoCreadoDto;
+import com.proyect.Butterfly.Dtos.ProductosDtos.ProductoEncontradoDto;
+import com.proyect.Butterfly.Exceptions.CategoriaExcepciones.CategoriaNoEncontradaId;
+import com.proyect.Butterfly.Exceptions.CategoriaExcepciones.CategoriaNoEncontradaNombre;
+import com.proyect.Butterfly.Exceptions.MarcaExcepciones.MarcaNoEncontradaExcepcion;
+import com.proyect.Butterfly.Exceptions.ProductoExcepciones.ProductoYaExistenteException;
+import com.proyect.Butterfly.Modelos.Categoria;
+import com.proyect.Butterfly.Modelos.Marca;
 import com.proyect.Butterfly.Modelos.Producto;
+import com.proyect.Butterfly.Repositorios.CategoriaRepositorio;
+import com.proyect.Butterfly.Repositorios.MarcaRepositorio;
+import com.proyect.Butterfly.Repositorios.ProductoRepositorio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProductoServicio {
 
-    public Producto crearProducto(){
-        return new Producto();
+    @Autowired
+    private MarcaRepositorio marcaRepositorio;
+
+    @Autowired
+    private ProductoRepositorio productoRepositorio;
+
+    @Autowired
+    private CategoriaRepositorio categoriaRepositorio;
+
+    public List<ProductoEncontradoDto> buscarProductoPorNombre(String nombre){
+        System.out.println(nombre);
+        return productoRepositorio.findByNombreContainingIgnoreCase(nombre).stream()
+                .map(producto ->
+                        new ProductoEncontradoDto(producto.getNombre(), producto.getId()))
+                .toList();
+    }
+
+
+    public ProductoCreadoDto crearProducto(CrearProductoDto crearProductoDto){
+        ProductoCreadoDto creadoDto = new ProductoCreadoDto();
+        if (productoRepositorio.existsByNombre(crearProductoDto.getNombre())){
+            throw new ProductoYaExistenteException(crearProductoDto.getNombre());
+        }
+        Producto producto = new Producto();
+
+        producto.setDescripcion(crearProductoDto.getDescripcion());
+        producto.setNombre(crearProductoDto.getNombre());
+        producto.setDisponible(crearProductoDto.getDisponible());
+//Agregar error de marca no encontrada
+      Marca marcaDelProducto = marcaRepositorio.findById(crearProductoDto.getMarcaId()).orElseThrow(()
+              ->new MarcaNoEncontradaExcepcion(Long.toString(crearProductoDto.getMarcaId())));
+      Categoria categoriaDelProducto = categoriaRepositorio.findById(crearProductoDto.getCategoriaId()).orElseThrow(()->
+              new CategoriaNoEncontradaId(crearProductoDto.getCategoriaId()));
+        producto.setMarcaId(marcaDelProducto);
+        producto.setCategoriaId(categoriaDelProducto);
+        productoRepositorio.save(producto);
+
+
+        creadoDto.setCategoria(categoriaDelProducto.getNombre());
+        creadoDto.setMarca(marcaDelProducto.getNombre());
+        creadoDto.setNombre(producto.getNombre());
+     return  creadoDto;
+
+
     }
 
 

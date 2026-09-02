@@ -44,35 +44,36 @@
         ></textarea>
       </div>
 
-      <!-- Marca -->
+      <!-- Marca + Categoría (fila de dos columnas) -->
       <div class="product-form__row">
         <div class="product-form__field">
-          <label class="product-form__label" for="brand">Marca</label>
+          <label class="product-form__label" for="brandId">Marca</label>
           <select
-            id="brand"
+            id="brandId"
             class="product-form__select"
-            [(ngModel)]="form.brand"
-            name="brand"
+            [(ngModel)]="form.brandId"
+            name="brandId"
+            required
           >
-            <option value="" disabled>Seleccionar marca</option>
-            @for (brand of brands; track brand) {
-              <option [value]="brand">{{ brand }}</option>
+            <option [ngValue]="null" disabled>Seleccionar marca</option>
+            @for (brand of marcas(); track brand.id) {
+              <option [ngValue]="brand.id">{{ brand.nombre }}</option>
             }
           </select>
         </div>
 
-        <!-- Categoría -->
         <div class="product-form__field">
-          <label class="product-form__label" for="category">Categoría</label>
+          <label class="product-form__label" for="categoryId">Categoría</label>
           <select
-            id="category"
+            id="categoryId"
             class="product-form__select"
-            [(ngModel)]="form.category"
-            name="category"
+            [(ngModel)]="form.categoryId"
+            name="categoryId"
+            required
           >
-            <option value="" disabled>Seleccionar categoría</option>
-            @for (cat of categories; track cat) {
-              <option [value]="cat">{{ cat }}</option>
+            <option [ngValue]="null" disabled>Seleccionar categoría</option>
+            @for (cat of categorias(); track cat.id) {
+              <option [ngValue]="cat.id">{{ cat.nombre }}</option>
             }
           </select>
         </div>

@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs';
 import { environment } from '../../environments/enviroment';
 import { Categoria } from '../modelos/categoria';
 import { CategoriaLista } from '../modelos/categoria.total';
@@ -83,6 +84,16 @@ export class CategoryService {
       .set('size', size.toString());       // Spring Boot espera 'size', no 'limit'
 
     return this.http.get<SpringPageResponse<CategoriaLista>>(`${this.baseUrl}/lista`, { params });
+  }/**
+ * Obtiene la lista simple de categorías para dropdowns en formularios.
+ * GET /api/v1/categorias/listaForm → SuccessResponse con data: [{ id, nombre }, ...]
+ */
+listarCategoriasDropdown(): Observable<{ id: number; nombre: string }[]> {
+    return this.http
+      .get<{ status: number; message: string; data: { id: number; nombre: string }[]; timestamp: string }>(
+        `${this.baseUrl}/listaForm`,
+      )
+      .pipe(map((res) => res.data));
   }
 
   /** Crea una nueva categoría */

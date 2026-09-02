@@ -14,8 +14,8 @@ public class Marca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
-    @Column(name = "nombre",length = 100)
+    private Long id;
+    @Column(name = "nombre",length = 100,nullable = false)
     private String nombre;
     @Column(name = "activo")
     private boolean activo;

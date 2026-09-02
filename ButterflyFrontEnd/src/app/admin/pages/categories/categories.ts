@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AdminTable, TableColumn, TableAction } from '../../shared/admin-table';
-import { CategoryService, SpringPageResponse } from '../../../services/category';
+import { CategoryService, SpringPageResponse } from '../../../services/category.service';
 import { Categoria } from '../../../modelos/categoria';
 import { CategoriaLista } from '../../../modelos/categoria.total';
 
@@ -111,6 +111,7 @@ export class Categories implements OnInit {
         this.totalPages.set(page.totalPages);
         this.totalItems.set(page.totalElements);
         this.isLoading.set(false);
+
       },
       error: (err) => {
         console.error('Error al cargar categorías:', err);
