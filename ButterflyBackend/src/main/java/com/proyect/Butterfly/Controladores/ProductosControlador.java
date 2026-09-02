@@ -31,7 +31,7 @@ public class ProductosControlador {
 
     }
     @GetMapping("/buscar")
-    public ResponseEntity<SuccessResponse<List<ProductoEncontradoDto>>> buscarProductosPorNombre(@RequestParam String nombre){
+    public ResponseEntity<SuccessResponse<List<ProductoEncontradoDto>> > buscarProductosPorNombre(@RequestParam String nombre){
         return ResponseEntity.ok(new SuccessResponse<>("Productos Encontrados",productoServicio.buscarProductoPorNombre(nombre)));
     }
 
